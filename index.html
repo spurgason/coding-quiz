@@ -13,12 +13,16 @@
 <body>
 
     <div class="container">
-        <!-- <div class="hide"> -->
-            <div class="counter, hide" id="counter">
-                <h1 id="timer" class="time"></h1>
-                <!-- highscore form -->
-            </div>
-        <!-- </div -->
+
+        <div class="counter, hide" id="counter">
+            <h1 id="timer" class="time"></h1>
+            <!-- highscore form -->
+            <form id="hide">
+                <input type="text" id="high-input" placeholder="Your Name Here">
+                <button id="high-submit" type="submit">Submit Score</button>
+            </form>
+        </div>
+
         <div id="question-container" class="hide">
             <div id="question" class="question">Question</div>
             <div id="answer-btns" class="btn-grid">
@@ -28,10 +32,12 @@
                 <div class="btn">Answer 4</div>
             </div>
         </div>
+
         <div class="controls">
             <button id="start-btn" class="start-btn">Start</button>
-            <button id="highscore" class="highscore-btn">Highscore</button>
+            <button id="highscore" class="highscore-btn">Highscores</button>
         </div>
+
     </div>
 
 

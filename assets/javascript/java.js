@@ -5,10 +5,13 @@ const questionEl = document.getElementById('question')
 const answerButtonEl = document.getElementById('answer-btns')
 const clockEl = document.getElementById('counter')
 const timerEl = document.getElementById('timer')
+const highInput = document.getElementById('high-input')
+const highSubmit =document.getElementById('high-submit')
 
 let shuffledQuestions, currentQuestionIndex
 
 startButton.addEventListener('click', startGame)
+
 answerButtonEl.addEventListener('click', () =>{
     currentQuestionIndex++
     setNextQuestion()
@@ -18,6 +21,7 @@ answerButtonEl.addEventListener('click', () =>{
 function startGame() {
     startButton.classList.add('hide')
     highButton.classList.add('hide')
+    highInput.classList.add('hide')
     clockEl.classList.remove('hide')
     shuffledQuestions = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
@@ -59,11 +63,10 @@ function selectAnswer(e) {
 const selectedButton = e.target
 const correct = selectedButton.dataset.correct
 setStatusClass(document.body, correct)
-// Array.from(answerButtonEl.children).forEach(button => {
-//     setStatusClass(button, button.dataset.correct)
-// })
-if(shuffledQuestions.lenght > currentQuestionIndex + 1){
-   
+if(shuffledQuestions.lenght > currentQuestionIndex + 1 ){
+
+}else{
+    
 }
 }
 
@@ -75,7 +78,7 @@ function setStatusClass(element, correct){
        console.log("correct")
         element.classList.add('correct')
     } else{
-      
+        timeLeft = timeLeft - 5
         console.log('wrong');
         element.classList.add('wrong')
     }
@@ -88,8 +91,9 @@ function clearStatusClass(element){
 }
 
 // function for the timer
+let timeLeft = 1
 function countdown(){
-    var timeLeft = 30
+    
 
     var timeInterval = setInterval(function(){
         if (timeLeft > 1){
@@ -101,13 +105,32 @@ function countdown(){
         } else{
             timerEl.textContent = 'Time is up';
             clearInterval(timeInterval);
-
+            highscoreInput()
         }
     }, 1000)
 }
 
+function highscoreInput(){
+    questionEl.classList.add('hide')
+    answerButtonEl.classList.add('hide')
+    highInput.classList.remove('hide')
 
-const questions = [
+    highSubmit.addEventListener('click',function(event) {
+        event.preventDefault();
+
+        var userName = document.querySelector('#high-input').value
+
+        if(userName === ''){
+            window.alert('Username cannot be blank');
+        }else{
+            window.alert('Success')
+        }
+
+        localStorage.setItem('user name', userName)
+    })
+}
+
+let questions = [
     {
         question: 'Inside which HTML element do we put the JavaScript?',
         answers: [
