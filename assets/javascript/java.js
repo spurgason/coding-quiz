@@ -6,11 +6,16 @@ const answerButtonEl = document.getElementById('answer-btns')
 const clockEl = document.getElementById('counter')
 const timerEl = document.getElementById('timer')
 const highInput = document.getElementById('high-input')
-const highSubmit =document.getElementById('high-submit')
+const highSubmit = document.getElementById('high-submit')
+const userNameSpan = document.getElementById('user-name')
+const userScoreSpan = document.getElementById('user-score')
+const highScoreBoard = document.getElementById('highscore-form')
 
 let shuffledQuestions, currentQuestionIndex
 
 startButton.addEventListener('click', startGame)
+
+highButton.addEventListener('click', showHighscore)
 
 answerButtonEl.addEventListener('click', () =>{
     currentQuestionIndex++
@@ -21,7 +26,7 @@ answerButtonEl.addEventListener('click', () =>{
 function startGame() {
     startButton.classList.add('hide')
     highButton.classList.add('hide')
-    highInput.classList.add('hide')
+    highScoreBoard.classList.add('hide')
     clockEl.classList.remove('hide')
     shuffledQuestions = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
@@ -63,11 +68,12 @@ function selectAnswer(e) {
 const selectedButton = e.target
 const correct = selectedButton.dataset.correct
 setStatusClass(document.body, correct)
-if(shuffledQuestions.lenght > currentQuestionIndex + 1 ){
-    highscoreInput()
+
+if(shuffledQuestions.length > currentQuestionIndex + 1 ){
+   
 }else{
-    
-    
+    stopCountdown();
+    highscoreInput();   
 }
 }
 
@@ -92,11 +98,10 @@ function clearStatusClass(element){
 }
 
 // function for the timer
-let timeLeft = 30
+let timeLeft = 30;
+let timeInterval;
 function countdown(){
-    
-
-    var timeInterval = setInterval(function(){
+    timeInterval = setInterval(function(){
         if (timeLeft > 1){
             timerEl.textContent = timeLeft + ' seconds remaining';
             timeLeft--;
@@ -111,10 +116,15 @@ function countdown(){
     }, 1000)
 }
 
+
+function stopCountdown(){
+    clearInterval(timeInterval);
+}
+
 function highscoreInput(){
     questionEl.classList.add('hide')
     answerButtonEl.classList.add('hide')
-    highInput.classList.remove('hide')
+    highScoreBoard.classList.remove('hide')
 
     highSubmit.addEventListener('click',function(event) {
         event.preventDefault();
@@ -124,12 +134,37 @@ function highscoreInput(){
         if(userName === ''){
             window.alert('Username cannot be blank');
         }else{
-            window.alert('Success')
+            
         }
 
         localStorage.setItem('user name', userName)
         localStorage.setItem('score', timeLeft)
+
+        renderLastHighscore()
     })
+}
+
+function showHighscore(){
+    
+    startButton.classList.add('hide')
+    highButton.classList.add('hide')
+    highInput.classList.add('hide')
+    highSubmit.classList.add('hide')
+    highScoreBoard.classList.remove('hide')
+
+    renderLastHighscore()
+} 
+
+function renderLastHighscore(){
+    let userName = localStorage.getItem('user name')
+    let userScore = localStorage.getItem('score')
+
+    if(userName === null || userScore === null){
+        return;
+    }
+
+    userNameSpan.textContent = userName
+    userScoreSpan.textContent = userScore
 }
 
 let questions = [

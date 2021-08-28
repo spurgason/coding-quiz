@@ -16,12 +16,14 @@
 
         <div class="counter, hide" id="counter">
             <h1 id="timer" class="time"></h1>
-            <!-- highscore form -->
-            <form id="hide">
-                <input type="text" id="high-input" placeholder="Your Name Here">
-                <button id="high-submit" type="submit">Submit Score</button>
-            </form>
         </div>
+        <form class="hide" id="highscore-form">
+            <h2 class="highscore-header">Highscores:</h2>
+            <p><strong class="user-score">User:</strong> <span id="user-name"></span></p>
+            <p><strong class="user-score">Score:</strong> <span id="user-score"></span></p>
+            <input type="text" class="name-input" id="high-input" placeholder="Your Name Here">
+            <button class="submit-btn" id="high-submit" type="submit">Submit Score</button>
+        </form>
 
         <div id="question-container" class="hide">
             <div id="question" class="question">Question</div>
