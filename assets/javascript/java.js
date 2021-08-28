@@ -116,11 +116,11 @@ function countdown(){
     }, 1000)
 }
 
-
+// function that stops the timer at certain points in the quiz
 function stopCountdown(){
     clearInterval(timeInterval);
 }
-
+// allows the user to put there name in to be placed on score board
 function highscoreInput(){
     questionEl.classList.add('hide')
     answerButtonEl.classList.add('hide')
@@ -143,7 +143,7 @@ function highscoreInput(){
         renderLastHighscore()
     })
 }
-
+// this function simply shows score when highscores button is clicked on
 function showHighscore(){
     
     startButton.classList.add('hide')
@@ -154,7 +154,7 @@ function showHighscore(){
 
     renderLastHighscore()
 } 
-
+// this function loads the scores either on the highscores section or at the end of the quiz
 function renderLastHighscore(){
     let userName = localStorage.getItem('user name')
     let userScore = localStorage.getItem('score')
@@ -166,7 +166,7 @@ function renderLastHighscore(){
     userNameSpan.textContent = userName
     userScoreSpan.textContent = userScore
 }
-
+// array for all my questions
 let questions = [
     {
         question: 'Inside which HTML element do we put the JavaScript?',
@@ -186,5 +186,36 @@ let questions = [
             { text: '*', correct: false },
             { text: '-', correct: false }
         ]
+    },
+
+    {
+        question: 'How do you write "Hello World" in an alert box?',
+        answers: [
+            { text: 'msgBox("Hello World");', correct: false },
+            { text: 'alert("Hello World");', correct: true },
+            { text: 'alertBox("Hello World");', correct: false },
+            { text: 'msg("Hello World");', correct: false }
+        ]
+    },
+
+    {
+        question: 'How do you create a function in JavaScript?',
+        answers: [
+            { text: 'function:myFunction()', correct: false },
+            { text: 'function myFunction{}', correct: false },
+            { text: 'function = myFunction()', correct: false },
+            { text: 'function myfunction()', correct: true }
+        ]
+    },
+
+    {
+        question: 'How to write an IF statement in JavaScript?',
+        answers: [
+            { text: 'if i == 5', correct: false },
+            { text: 'if i = 5', correct: false },
+            { text: 'if (i == 5)', correct: true },
+            { text: 'if i = 5', correct: false }
+        ]
     }
+    
 ]
