@@ -64,8 +64,9 @@ const selectedButton = e.target
 const correct = selectedButton.dataset.correct
 setStatusClass(document.body, correct)
 if(shuffledQuestions.lenght > currentQuestionIndex + 1 ){
-
+    highscoreInput()
 }else{
+    
     
 }
 }
@@ -91,7 +92,7 @@ function clearStatusClass(element){
 }
 
 // function for the timer
-let timeLeft = 1
+let timeLeft = 30
 function countdown(){
     
 
@@ -127,6 +128,7 @@ function highscoreInput(){
         }
 
         localStorage.setItem('user name', userName)
+        localStorage.setItem('score', timeLeft)
     })
 }
 
